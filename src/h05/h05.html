@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Bleachchooser</title>
+    <link href="https://fonts.googleapis.com/css?family=Copse" rel="stylesheet">
+    <style>
+
+        body {
+            font-family: 'Copse', Serif;
+            text-align: center;
+        }
+        div.picture-holder {
+            box-sizing: border-box;
+            height: 450px;
+            width: 300px;
+            float: left;
+            border: solid 1px black;
+        }
+
+        div.favorite{
+            width:300px;
+            height: 150px;
+            background-image: none;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+
+        #pics {
+            width: 900px;
+            height: 1350px;
+            border: solid 1px black;
+            font-size: 0px;
+            margin: auto;
+        }
+
+    </style>
+</head>
+<body>
+<h1>BleachchooserV1</h1>
+<h3>Choose yer pica</h3>
+<div id="pics">
+
+</div>
+<script>
+
+    pics = document.getElementById("pics");
+    createPicsHolders();
+    createBleachImages();
+
+    function createPicsHolders(){
+        for (var i = 0; i < 9; i++) {
+            pictureHolder = document.createElement("div");
+            pictureHolder.className = "picture-holder";
+            pictureHolder.id = "picture-holder-" + i;
+            pics.appendChild(pictureHolder);
+        }
+    }
+
+    function createBleachImages() {
+        pictureHolders = document.getElementsByClassName("picture-holder");
+        for(var i = 0; i < pictureHolders.length; i++) {
+            favorite = document.createElement("div");
+            favorite.className = "favorite";
+            favorite.id = "favorite_" + (i+1);
+            bleachPlaatje = document.createElement("img");
+            bleachPlaatje.src = "IMG/bleach" + (i+1) + ".jpg";
+            bleachPlaatje.id = (i+1);
+            bleachPlaatje.addEventListener("click", function ( ) {
+                maakFavorite(this.id);
+            });
+            pictureHolders[i].appendChild(favorite);
+            pictureHolders[i].appendChild(bleachPlaatje);
+        }
+    }
+
+
+    function maakFavorite(id) {
+        console.log("My Favorite" + id );
+        notsofavorite = document.getElementsByClassName("favorite");
+
+        for(var i = 0; i < notsofavorite.length; i++ ) {
+            notsofavorite[i].style.backgroundImage = "none";
+        }
+
+        favorite = document.getElementById("favorite_" + id);
+        favorite.style.backgroundImage = "url('IMG/heart.png')";
+    }
+
+</script>
+</body>
+</html>
